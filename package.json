@@ -1,0 +1,22 @@
+{
+  "name": "@nadir2k/manual-scroll-detector",
+  "version": "1.0.0",
+  "description": "Detects user-initiated manual scrolling (mouse, touch, keyboard, wheel).",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "scroll",
+    "manual-scroll",
+    "detect-scroll",
+    "typescript"
+  ],
+  "author": "Nadir Abbas <nadirabbasforwork@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.9.2"
+  }
+}
