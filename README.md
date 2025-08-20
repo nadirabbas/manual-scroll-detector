@@ -1,4 +1,4 @@
-# manual-scroll-detector
+# Manual scroll detector
 
 Detect user-initiated manual scrolling (mouse, touch, keyboard, wheel) for HTML elements.
 
@@ -7,7 +7,7 @@ Detect user-initiated manual scrolling (mouse, touch, keyboard, wheel) for HTML 
 ## Installation
 
 ```bash
-npm install manual-scroll-detector
+npm install @nadir2k/manual-scroll-detector
 ```
 
 ---
@@ -17,7 +17,7 @@ npm install manual-scroll-detector
 ### Basic Usage
 
 ```ts
-import { attachManualScrollDetector } from "manual-scroll-detector";
+import { attachManualScrollDetector } from "@nadir2k/manual-scroll-detector";
 
 const el = document.getElementById("scrollBox")!;
 attachManualScrollDetector(el, (manual, element) => {
