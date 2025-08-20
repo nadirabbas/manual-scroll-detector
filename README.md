@@ -20,9 +20,12 @@ npm install @nadir2k/manual-scroll-detector
 import { attachManualScrollDetector } from "@nadir2k/manual-scroll-detector";
 
 const el = document.getElementById("scrollBox")!;
-attachManualScrollDetector(el, (manual, element) => {
+const detatch = attachManualScrollDetector(el, (manual, element) => {
   console.log(`Manual scroll on ${element.id}:`, manual);
 });
+
+// detach listeners when needed
+detach()
 ```
 
 ---
