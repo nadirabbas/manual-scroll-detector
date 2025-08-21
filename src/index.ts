@@ -1,4 +1,3 @@
-// src/index.ts
 export type ScrollCallback = (manual: boolean) => void;
 
 export enum ScrollKeys {
@@ -81,21 +80,17 @@ export function attachManualScrollDetector(
   };
   window.addEventListener("keydown", onKeyDown);
 
-  // Detect wheel scrolling
+  // Detect wheel scrolling (always counts)
   const onWheel = () => {
-    if (isElementActive()) {
-      isUserScrolling = true;
-      callback(true);
-    }
+    isUserScrolling = true;
+    callback(true);
   };
   el.addEventListener("wheel", onWheel);
 
-  // Detect touch scrolling
+  // Detect touch scrolling (always counts)
   const onTouchStart = () => {
-    if (isElementActive()) {
-      isUserScrolling = true;
-      callback(true);
-    }
+    isUserScrolling = true;
+    callback(true);
   };
   el.addEventListener("touchstart", onTouchStart);
 
