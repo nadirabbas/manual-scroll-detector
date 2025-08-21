@@ -1,6 +1,6 @@
 {
   "name": "@nadir2k/manual-scroll-detector",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Detects user-initiated manual scrolling (mouse, touch, keyboard, wheel).",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
