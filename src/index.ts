@@ -1,9 +1,24 @@
-// src/index.ts
 export type ScrollCallback = (manual: boolean) => void;
+
+export enum ScrollKeys {
+  ArrowUp = "ArrowUp",
+  ArrowDown = "ArrowDown",
+  ArrowLeft = "ArrowLeft",
+  ArrowRight = "ArrowRight",
+  PageUp = "PageUp",
+  PageDown = "PageDown",
+  Home = "Home",
+  End = "End",
+}
+
+export interface ManualScrollOptions {
+  ignoreKeys?: ScrollKeys[];
+}
 
 export function attachManualScrollDetector(
   el: HTMLElement,
-  callback: ScrollCallback
+  callback: ScrollCallback,
+  options: ManualScrollOptions = {}
 ) {
   let isUserScrolling = false;
   let lastScrollTop = el.scrollTop;
@@ -39,18 +54,22 @@ export function attachManualScrollDetector(
   window.addEventListener("mouseleave", stopDrag);
 
   // Detect keyboard scrolling
-  const keyScrollKeys = [
-    "ArrowUp",
-    "ArrowDown",
-    "ArrowLeft",
-    "ArrowRight",
-    "PageUp",
-    "PageDown",
-    "Home",
-    "End",
+  const keyScrollKeys: ScrollKeys[] = [
+    ScrollKeys.ArrowUp,
+    ScrollKeys.ArrowDown,
+    ScrollKeys.ArrowLeft,
+    ScrollKeys.ArrowRight,
+    ScrollKeys.PageUp,
+    ScrollKeys.PageDown,
+    ScrollKeys.Home,
+    ScrollKeys.End,
   ];
+
   const onKeyDown = (e: KeyboardEvent) => {
-    if (keyScrollKeys.includes(e.key)) {
+    if (
+      keyScrollKeys.includes(e.key as ScrollKeys) &&
+      !options.ignoreKeys?.includes(e.key as ScrollKeys)
+    ) {
       isUserScrolling = true;
       callback(true);
     }
