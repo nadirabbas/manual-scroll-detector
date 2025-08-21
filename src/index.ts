@@ -65,8 +65,7 @@ export function attachManualScrollDetector(
     ScrollKeys.End,
   ];
 
-  const isElementActive = () =>
-    document.activeElement === el || el.contains(document.activeElement);
+  const isElementActive = () => el.matches(":focus, :focus-within");
 
   const onKeyDown = (e: KeyboardEvent) => {
     if (
