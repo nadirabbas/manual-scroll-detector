@@ -1,3 +1,4 @@
+// src/index.ts
 export type ScrollCallback = (manual: boolean) => void;
 
 export enum ScrollKeys {
@@ -53,7 +54,7 @@ export function attachManualScrollDetector(
   window.addEventListener("mouseup", stopDrag);
   window.addEventListener("mouseleave", stopDrag);
 
-  // Detect keyboard scrolling
+  // Detect keyboard scrolling (only if element is active)
   const keyScrollKeys: ScrollKeys[] = [
     ScrollKeys.ArrowUp,
     ScrollKeys.ArrowDown,
@@ -65,10 +66,14 @@ export function attachManualScrollDetector(
     ScrollKeys.End,
   ];
 
+  const isElementActive = () =>
+    document.activeElement === el || el.contains(document.activeElement);
+
   const onKeyDown = (e: KeyboardEvent) => {
     if (
       keyScrollKeys.includes(e.key as ScrollKeys) &&
-      !options.ignoreKeys?.includes(e.key as ScrollKeys)
+      !options.ignoreKeys?.includes(e.key as ScrollKeys) &&
+      isElementActive()
     ) {
       isUserScrolling = true;
       callback(true);
@@ -78,15 +83,19 @@ export function attachManualScrollDetector(
 
   // Detect wheel scrolling
   const onWheel = () => {
-    isUserScrolling = true;
-    callback(true);
+    if (isElementActive()) {
+      isUserScrolling = true;
+      callback(true);
+    }
   };
   el.addEventListener("wheel", onWheel);
 
   // Detect touch scrolling
   const onTouchStart = () => {
-    isUserScrolling = true;
-    callback(true);
+    if (isElementActive()) {
+      isUserScrolling = true;
+      callback(true);
+    }
   };
   el.addEventListener("touchstart", onTouchStart);
 
@@ -127,4 +136,3 @@ export function attachManualScrollDetector(
     window.removeEventListener("mouseup", reset);
   };
 }
-
